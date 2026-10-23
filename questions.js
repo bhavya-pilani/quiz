@@ -660,3 +660,197 @@ window.QUIZ_ASSIGNMENTS[7].questions = [
     explanation: "A check box can be selected or deselected by clicking it, toggling between the on and off states."
   }
 ];
+
+// Assignment 9 - Programming in Java
+window.QUIZ_ASSIGNMENTS[8].questions = [
+  {
+    prompt: "The container displays a number of components in a row, but adjusts according to the window size. Which layout manager is most naturally suited for the layout shown?",
+    choices: [
+      "FlowLayout",
+      "BorderLayout",
+      "GridLayout",
+      "BoxLayout"
+    ],
+    answerIndex: 0,
+    explanation: "FlowLayout arranges components from left to right and wraps them onto the next row when the container becomes too narrow."
+  },
+  {
+    prompt: "In Java, what is the primary purpose of a layout manager?",
+    choices: [
+      "To manage memory allocation",
+      "To arrange GUI components within a container",
+      "To handle exception handling",
+      "To control database connections"
+    ],
+    answerIndex: 1,
+    explanation: "A layout manager automatically controls the positioning and sizing of GUI components within a container."
+  },
+  {
+    prompt: `Consider the following code:
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class NPTEL {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("NPTEL Java Course");
+        JButton button = new JButton("Click Me");
+        button.setBounds(50, 100, 100, 40);
+
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(
+                    null, "Welcome to the course"
+                );
+            }
+        });
+
+        frame.add(button);
+        frame.setSize(300, 200);
+        frame.setLayout(null);
+        frame.setVisible(true);
+    }
+}
+
+What happens when the button in this Java code snippet is clicked?`,
+    choices: [
+      "The program exits",
+      'A message dialog with the text "Welcome to the course" is displayed',
+      'The button label changes to "Welcome to the course"',
+      "Nothing happens"
+    ],
+    answerIndex: 1,
+    explanation: "The button's ActionListener invokes JOptionPane.showMessageDialog() when the button is clicked."
+  },
+  {
+    prompt: `Consider the following code:
+
+import javax.swing.*;
+
+public class NPTEL extends JFrame {
+    JButton button;
+
+    public NPTEL() {
+        button = new JButton("Programming in Java");
+        add(button);
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new NPTEL();
+    }
+}
+
+What will be the output of the above code?`,
+    choices: [
+      'Creates a JFrame with a JButton labeled "Programming in Java"',
+      "Compiles with errors",
+      "Displays a message dialog",
+      'Creates a JPanel with a JButton labeled "Programming in Java"'
+    ],
+    answerIndex: 0,
+    explanation: "NPTEL extends JFrame, and its constructor adds a JButton to the frame and displays the window."
+  },
+  {
+    prompt: `Consider the following code:
+
+import javax.swing.*;
+
+public class FrameExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Demo Frame");
+        JButton button = new JButton("Click Me");
+        // INSERT CODE HERE
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+    }
+}
+
+What should replace // INSERT CODE HERE to create a JFrame with a JButton labeled "Click Me"?`,
+    choices: [
+      "frame.add(button);",
+      "frame.insert(button);",
+      "frame.append(button);",
+      "frame.push(button);"
+    ],
+    answerIndex: 0,
+    explanation: "The add() method adds the button component to the JFrame."
+  },
+  {
+    prompt: `Identify and correct the error in the following program:
+
+import javax.swing.*;
+import java.awt.*;
+
+public class PanelExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Panel Example");
+        JPanel panel = new JPanel();
+        JButton button = new JButton("Submit");
+
+        panel.setFlowLayout(); // ERROR
+        panel.add(button);
+        frame.add(panel);
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+What should the erroneous line panel.setFlowLayout(); be replaced with?`,
+    choices: [
+      "panel.setLayout(new);",
+      "panel.addFlowLayout();",
+      "panel.appendLayout(new FlowLayout());",
+      "panel.setLayout(new FlowLayout());"
+    ],
+    answerIndex: 3,
+    explanation: "The correct syntax is panel.setLayout(new FlowLayout()). The setLayout() method assigns a layout manager to the panel."
+  },
+  {
+    prompt: "Which method is used to remove a component from a container in AWT?",
+    choices: [
+      "remove()",
+      "deleteComponent()",
+      "removeComponent()",
+      "destroy()"
+    ],
+    answerIndex: 0,
+    explanation: "The Container class provides remove() methods to remove components from a container."
+  },
+  {
+    prompt: "Which method is used to handle mouse click events in Java Swing?",
+    choices: [
+      "mouseClicked()",
+      "keyPressed()",
+      "actionPerformed()",
+      "componentShown()"
+    ],
+    answerIndex: 0,
+    explanation: "mouseClicked() is a method of MouseListener that handles mouse-click events."
+  },
+  {
+    prompt: "Which Swing component is best suited for displaying a drop-down list of selectable options?",
+    choices: [
+      "JButton",
+      "JComboBox",
+      "JTextField",
+      "JPanel"
+    ],
+    answerIndex: 1,
+    explanation: "JComboBox displays a drop-down list from which the user can select an option."
+  },
+  {
+    prompt: "Which of the following functions is used to specify the layout of a container?",
+    choices: [
+      "UseLayout()",
+      "setLayout()",
+      "layout()",
+      "DesignLayout()"
+    ],
+    answerIndex: 1,
+    explanation: "The setLayout() method assigns a layout manager to a container."
+  }
+];
