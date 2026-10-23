@@ -62,27 +62,40 @@
 
   function renderPrompt(container, promptText) {
     container.replaceChildren();
-    promptText.split(/\n\s*\n/).forEach((block) => {
+    const codeBlocks = [];
+
+    function flushCode() {
+      if (codeBlocks.length === 0) return;
+      const lines = codeBlocks.join("\n\n").split("\n");
+      const nonEmptyLines = lines.filter((line) => line.trim());
+      const indentation = Math.min(...nonEmptyLines.map((line) => line.match(/^\s*/)[0].length));
+      const code = document.createElement("pre");
+      code.className = "question-code";
+      code.textContent = lines.map((line) => line.slice(indentation)).join("\n");
+      container.append(code);
+      codeBlocks.length = 0;
+    }
+
+    promptText.split(/\n[ \t]*\n/).forEach((block) => {
       const content = block.trim();
       if (!content) return;
 
-      const hasCode = content.includes("\n") &&
-        /(?:\b(?:class|public|static|void|int|System\.out|return|if|for|while|new)\b|[{};])/.test(content);
+      const isBrace = /^[{}]+;?$/.test(content);
+      const hasJavaSyntax = /(?:^|\n)\s*(?:public|private|protected|static|class|void|int|String|return|if|for|while|new|package|import|System\.)\b/m.test(content) &&
+        /[{};]|\b(?:return|new|package|import)\b/.test(content);
+      const hasCode = isBrace || hasJavaSyntax;
       if (hasCode) {
-        const lines = content.split("\n");
-        const nonEmptyLines = lines.filter((line) => line.trim());
-        const indentation = Math.min(...nonEmptyLines.map((line) => line.match(/^\s*/)[0].length));
-        const code = document.createElement("pre");
-        code.className = "question-code";
-        code.textContent = lines.map((line) => line.slice(indentation)).join("\n");
-        container.append(code);
-      } else {
-        const text = document.createElement("p");
-        text.className = "question-text";
-        text.textContent = content;
-        container.append(text);
+        codeBlocks.push(block.replace(/\s+$/, ""));
+        return;
       }
+
+      flushCode();
+      const text = document.createElement("p");
+      text.className = "question-text";
+      text.textContent = content;
+      container.append(text);
     });
+    flushCode();
   }
 
   function renderRevision() {
