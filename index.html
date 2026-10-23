@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7f5">
+    <title>Study Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="questions.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Study Quiz home">
+          <span class="brand-mark" aria-hidden="true">q.</span>
+          <span>Study Quiz</span>
+        </a>
+        <span class="topbar-note">A little practice goes a long way.</span>
+      </header>
+
+      <section id="home-screen" class="screen">
+        <div class="intro">
+          <p class="eyebrow">YOUR STUDY SPACE</p>
+          <h1>Ready when<br>you are.</h1>
+          <p class="intro-copy">Pick an assignment or mix things up. Take your time, then review anything you missed.</p>
+        </div>
+
+        <div class="mode-grid">
+          <article class="mode-card">
+            <div class="card-icon assignment-icon" aria-hidden="true">01</div>
+            <h2>By assignment</h2>
+            <p>Focus on one assignment at a time.</p>
+            <label for="assignment-select">Choose an assignment</label>
+            <select id="assignment-select" aria-label="Choose an assignment"></select>
+            <button id="start-assignment" class="button button-primary" type="button">Start assignment <span aria-hidden="true">→</span></button>
+          </article>
+
+          <article class="mode-card mode-card-tint">
+            <div class="card-icon mix-icon" aria-hidden="true">↗</div>
+            <h2>Mixed quiz</h2>
+            <p>Questions from every assignment, shuffled.</p>
+            <div class="mix-detail"><span class="status-dot"></span><span id="mixed-count">Loading questions…</span></div>
+            <button id="start-mixed" class="button button-secondary" type="button">Start mixed quiz <span aria-hidden="true">→</span></button>
+          </article>
+        </div>
+        <p id="home-message" class="message" role="status"></p>
+        <p class="timer-note"><span aria-hidden="true">◷</span> A stopwatch tracks how long you take.</p>
+      </section>
+
+      <section id="quiz-screen" class="screen hidden" aria-live="polite">
+        <div class="quiz-topline">
+          <button id="exit-quiz" class="text-button" type="button">← Exit quiz</button>
+          <span id="quiz-label" class="quiz-label"></span>
+        </div>
+        <div class="quiz-heading">
+          <div>
+            <p id="question-count" class="eyebrow question-count"></p>
+            <h1>Choose your answer</h1>
+          </div>
+          <div class="timer-wrap">
+            <span class="timer-caption">TIME ELAPSED</span>
+            <div id="timer" class="timer" role="timer" aria-label="Elapsed time 00:00">00:00</div>
+          </div>
+        </div>
+        <div class="progress-track" aria-label="Quiz progress"><div id="progress-bar"></div></div>
+        <article class="question-card">
+          <div id="question-prompt" class="question-prompt" role="heading" aria-level="2"></div>
+          <div id="answer-options" class="answer-options"></div>
+        </article>
+        <div class="quiz-actions">
+          <button id="previous-question" class="button button-quiet" type="button">← Previous</button>
+          <button id="next-question" class="button button-primary" type="button">Next question <span aria-hidden="true">→</span></button>
+          <button id="finish-quiz" class="button button-primary hidden" type="button">Finish quiz <span aria-hidden="true">✓</span></button>
+        </div>
+      </section>
+
+      <section id="results-screen" class="screen hidden">
+        <div class="results-heading">
+          <p class="eyebrow">QUIZ COMPLETE</p>
+          <h1 id="result-title">Nice work.</h1>
+          <p id="result-summary" class="intro-copy"></p>
+        </div>
+        <div class="score-card">
+          <span class="score-caption">YOUR SCORE</span>
+          <strong id="score-value"></strong>
+          <span id="score-detail"></span>
+        </div>
+        <div class="review-heading">
+          <h2>Questions to review</h2>
+          <span id="review-count"></span>
+        </div>
+        <div id="answer-review" class="answer-review"></div>
+        <button id="back-home" class="button button-primary" type="button">Back to quizzes <span aria-hidden="true">→</span></button>
+      </section>
+
+      <footer class="footer">Made for focused learning.</footer>
+    </main>
+  </body>
+</html>
