@@ -27,7 +27,12 @@ QUIZ_ASSIGNMENTS[0].questions = [
   },
   {
     prompt: "What is the correct sequence of steps to execute a Java program?",
-    choices: ["Run â†’ Edit â†’ Compile", "Edit â†’ Run â†’ Compile", "Compile â†’ Edit â†’ Run", "Edit â†’ Compile â†’ Run"],
+    choices: [
+  "Run -> Edit -> Compile",
+  "Edit -> Run -> Compile",
+  "Compile -> Edit -> Run",
+  "Edit -> Compile -> Run"
+],
     answerIndex: 3,
     explanation: "The Java development process involves writing code (Edit), converting it to bytecode (Compile), and then\nexecuting it on the JVM (Run)."
   },
@@ -464,15 +469,12 @@ class Main {
 
 public class Calculator {
     int num = 100;
-
     public void calc(int num) {
         this.num = num * 10;
     }
-
     public void printNum() {
         System.out.println(num);
     }
-
     public static void main(String[] args) {
         Calculator obj = new Calculator();
         obj.calc(2);
