@@ -729,7 +729,6 @@ import javax.swing.*;
 
 public class NPTEL extends JFrame {
     JButton button;
-
     public NPTEL() {
         button = new JButton("Programming in Java");
         add(button);
@@ -737,7 +736,6 @@ public class NPTEL extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
-
     public static void main(String[] args) {
         new NPTEL();
     }
@@ -789,7 +787,6 @@ public class PanelExample {
         JFrame frame = new JFrame("Panel Example");
         JPanel panel = new JPanel();
         JButton button = new JButton("Submit");
-
         panel.setFlowLayout(); // ERROR
         panel.add(button);
         frame.add(panel);

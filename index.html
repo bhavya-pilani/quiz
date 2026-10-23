@@ -44,9 +44,31 @@
             <div class="mix-detail"><span class="status-dot"></span><span id="mixed-count">Loading questions…</span></div>
             <button id="start-mixed" class="button button-secondary" type="button">Start mixed quiz <span aria-hidden="true">→</span></button>
           </article>
+
+          <article class="mode-card revision-card">
+            <div class="card-icon revision-icon" aria-hidden="true">Aa</div>
+            <h2>Quick revision</h2>
+            <p>Review every question with the correct answer, in assignment order.</p>
+            <div class="mix-detail"><span id="revision-count">Loading questions…</span></div>
+            <button id="start-revision" class="button button-secondary" type="button">Open revision <span aria-hidden="true">→</span></button>
+          </article>
         </div>
         <p id="home-message" class="message" role="status"></p>
         <p class="timer-note"><span aria-hidden="true">◷</span> A stopwatch tracks how long you take.</p>
+      </section>
+
+      <section id="revision-screen" class="screen hidden">
+        <div class="quiz-topline">
+          <button id="exit-revision" class="text-button" type="button">← Back to quizzes</button>
+          <span class="quiz-label">No timer · Assignment order</span>
+        </div>
+        <header class="revision-heading">
+          <p class="eyebrow">STUDY MODE</p>
+          <h1>Quick revision</h1>
+          <p id="revision-summary" class="intro-copy"></p>
+        </header>
+        <div id="revision-content" class="revision-content"></div>
+        <button id="revision-back-home" class="button button-primary" type="button">Back to quizzes <span aria-hidden="true">→</span></button>
       </section>
 
       <section id="quiz-screen" class="screen hidden" aria-live="polite">

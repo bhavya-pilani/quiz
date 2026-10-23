@@ -4,12 +4,14 @@
   const assignments = window.QUIZ_ASSIGNMENTS || [];
   const screens = {
     home: document.getElementById("home-screen"),
+    revision: document.getElementById("revision-screen"),
     quiz: document.getElementById("quiz-screen"),
     results: document.getElementById("results-screen")
   };
   const assignmentSelect = document.getElementById("assignment-select");
   const homeMessage = document.getElementById("home-message");
   const mixedCount = document.getElementById("mixed-count");
+  const revisionCount = document.getElementById("revision-count");
   const timerElement = document.getElementById("timer");
   let questions = [];
   let answers = [];
@@ -53,6 +55,99 @@
     mixedCount.textContent = count
       ? `${count} question${count === 1 ? "" : "s"} ready to go`
       : "Questions will appear here once added";
+    revisionCount.textContent = count
+      ? `${count} question${count === 1 ? "" : "s"} with answers`
+      : "No questions available yet";
+  }
+
+  function renderPrompt(container, promptText) {
+    container.replaceChildren();
+    promptText.split(/\n\s*\n/).forEach((block) => {
+      const content = block.trim();
+      if (!content) return;
+
+      const hasCode = content.includes("\n") &&
+        /(?:\b(?:class|public|static|void|int|System\.out|return|if|for|while|new)\b|[{};])/.test(content);
+      if (hasCode) {
+        const lines = content.split("\n");
+        const nonEmptyLines = lines.filter((line) => line.trim());
+        const indentation = Math.min(...nonEmptyLines.map((line) => line.match(/^\s*/)[0].length));
+        const code = document.createElement("pre");
+        code.className = "question-code";
+        code.textContent = lines.map((line) => line.slice(indentation)).join("\n");
+        container.append(code);
+      } else {
+        const text = document.createElement("p");
+        text.className = "question-text";
+        text.textContent = content;
+        container.append(text);
+      }
+    });
+  }
+
+  function renderRevision() {
+    const count = allQuestions().length;
+    if (count === 0) {
+      homeMessage.textContent = "There aren't any questions to revise yet.";
+      return;
+    }
+    homeMessage.textContent = "";
+    document.getElementById("revision-summary").textContent =
+      `${count} questions · Correct answers shown · Ordered by assignment`;
+    const content = document.getElementById("revision-content");
+    content.replaceChildren();
+
+    assignments.forEach((assignment) => {
+      if (!assignment.questions || assignment.questions.length === 0) return;
+      const group = document.createElement("section");
+      group.className = "revision-assignment";
+      const heading = document.createElement("h2");
+      heading.textContent = assignment.title;
+      group.append(heading);
+
+      assignment.questions.forEach((question, questionIndex) => {
+        const card = document.createElement("article");
+        card.className = "revision-question-card";
+        const label = document.createElement("p");
+        label.className = "revision-question-number";
+        label.textContent = `QUESTION ${questionIndex + 1}`;
+        const prompt = document.createElement("div");
+        prompt.className = "revision-prompt";
+        renderPrompt(prompt, question.prompt);
+        const choices = document.createElement("ol");
+        choices.className = "revision-choices";
+        question.choices.forEach((choice, choiceIndex) => {
+          const option = document.createElement("li");
+          option.className = choiceIndex === question.answerIndex
+            ? "revision-choice revision-choice-correct"
+            : "revision-choice";
+          const marker = document.createElement("span");
+          marker.className = "revision-choice-marker";
+          marker.textContent = String.fromCharCode(65 + choiceIndex);
+          const text = document.createElement("span");
+          text.className = "revision-choice-text";
+          text.textContent = choice;
+          option.append(marker, text);
+          if (choiceIndex === question.answerIndex) {
+            const correct = document.createElement("span");
+            correct.className = "correct-badge";
+            correct.textContent = "Correct answer";
+            option.append(correct);
+          }
+          choices.append(option);
+        });
+        card.append(label, prompt, choices);
+        if (question.explanation) {
+          const explanation = document.createElement("p");
+          explanation.className = "revision-explanation";
+          explanation.textContent = question.explanation;
+          card.append(explanation);
+        }
+        group.append(card);
+      });
+      content.append(group);
+    });
+    showScreen("revision");
   }
 
   function startQuiz(selectedQuestions, label) {
@@ -80,29 +175,7 @@
     const question = questions[currentQuestion];
     document.getElementById("question-count").textContent =
       `QUESTION ${currentQuestion + 1} OF ${questions.length}`;
-    const prompt = document.getElementById("question-prompt");
-    prompt.replaceChildren();
-    question.prompt.split(/\n\s*\n/).forEach((block) => {
-      const content = block.trim();
-      if (!content) return;
-
-      const hasCode = content.includes("\n") &&
-        /(?:\b(?:class|public|static|void|int|System\.out|return|if|for|while|new)\b|[{};])/.test(content);
-      if (hasCode) {
-        const lines = content.split("\n");
-        const nonEmptyLines = lines.filter((line) => line.trim());
-        const indentation = Math.min(...nonEmptyLines.map((line) => line.match(/^\s*/)[0].length));
-        const code = document.createElement("pre");
-        code.className = "question-code";
-        code.textContent = lines.map((line) => line.slice(indentation)).join("\n");
-        prompt.append(code);
-      } else {
-        const text = document.createElement("p");
-        text.className = "question-text";
-        text.textContent = content;
-        prompt.append(text);
-      }
-    });
+    renderPrompt(document.getElementById("question-prompt"), question.prompt);
     const options = document.getElementById("answer-options");
     options.replaceChildren();
     question.choices.forEach((choice, index) => {
@@ -234,6 +307,9 @@
     const mixed = shuffle(allQuestions());
     startQuiz(mixed, "Mixed quiz");
   });
+  document.getElementById("start-revision").addEventListener("click", renderRevision);
+  document.getElementById("exit-revision").addEventListener("click", () => showScreen("home"));
+  document.getElementById("revision-back-home").addEventListener("click", () => showScreen("home"));
   document.getElementById("exit-quiz").addEventListener("click", () => {
     if (timerId !== null) window.clearInterval(timerId);
     timerId = null;
