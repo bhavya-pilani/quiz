@@ -851,3 +851,117 @@ What should the erroneous line panel.setFlowLayout(); be replaced with?`,
     explanation: "The setLayout() method assigns a layout manager to a container."
   }
 ];
+
+// Assignment 10 - Programming in Java
+window.QUIZ_ASSIGNMENTS[9].questions = [
+  {
+    prompt: "Which Swing component is used to display a window?",
+    choices: [
+      "JFrame",
+      "JButton",
+      "JLabel",
+      "JTextField"
+    ],
+    answerIndex: 0,
+    explanation: "JFrame is a top-level Swing container used to create a window."
+  },
+  {
+    prompt: "Which Swing component is used to enter a single line of text?",
+    choices: [
+      "JButton",
+      "JLabel",
+      "JTextField",
+      "JPanel"
+    ],
+    answerIndex: 2,
+    explanation: "JTextField allows users to enter or edit a single line of text."
+  },
+  {
+    prompt: "Which Swing component is commonly used to display non-editable text?",
+    choices: [
+      "JLabel",
+      "JButton",
+      "JFrame",
+      "JTextField"
+    ],
+    answerIndex: 0,
+    explanation: "JLabel displays text or images that users cannot directly edit."
+  },
+  {
+    prompt: "Which JDBC interface is used to execute SQL statements?",
+    choices: [
+      "ResultSet",
+      "Statement",
+      "Connection",
+      "DriverManager"
+    ],
+    answerIndex: 1,
+    explanation: "The Statement interface is used to execute SQL statements against a database."
+  },
+  {
+    prompt: "Which JDBC object contains the result of a SELECT query?",
+    choices: [
+      "Connection",
+      "Statement",
+      "ResultSet",
+      "DriverManager"
+    ],
+    answerIndex: 2,
+    explanation: "ResultSet stores and provides access to the rows returned by a SELECT query."
+  },
+  {
+    prompt: "Which JDBC class is used to establish a database connection?",
+    choices: [
+      "DriverManager",
+      "ResultSet",
+      "Statement",
+      "Scanner"
+    ],
+    answerIndex: 0,
+    explanation: "DriverManager provides the getConnection() method to establish a database connection."
+  },
+  {
+    prompt: "Which Java class is used to connect a client to a server?",
+    choices: [
+      "ServerSocket",
+      "Socket",
+      "URL",
+      "NetworkInterface"
+    ],
+    answerIndex: 1,
+    explanation: "Socket represents a client-side endpoint used to establish communication with a server."
+  },
+  {
+    prompt: "Which class is used by a server to listen for client connections?",
+    choices: [
+      "Socket",
+      "URL",
+      "ServerSocket",
+      "NetworkInterface"
+    ],
+    answerIndex: 2,
+    explanation: "ServerSocket listens for incoming client connection requests on a server port."
+  },
+  {
+    prompt: "Which protocol is used in the URL https://nptel.ac.in/?",
+    choices: [
+      "FTP",
+      "HTTP",
+      "HTTPS",
+      "SMTP"
+    ],
+    answerIndex: 2,
+    explanation: "The URL begins with https://, which specifies the HTTPS protocol."
+  },
+  {
+    prompt: "Which method of NetworkInterface is used to check whether a network interface is up?",
+    choices: [
+      "isActive()",
+      "isUp()",
+      "isRunning()",
+      "isConnected()"
+    ],
+    answerIndex: 1,
+    explanation: "NetworkInterface.isUp() checks whether the network interface is up and operational."
+  }
+];
